@@ -1,0 +1,31 @@
+## Download source tarball from
+## https://www.physics.princeton.edu/pulsar/K1JT/wsjtx.html
+## Unpack main tgz followed by wsjtx.tgz in the src/ directory:
+# tar -xzf wsjtx-2.0.1.tgz
+# cd wsjtx-2.0.1/src
+# tar -xzf wsjtx.tgz
+## Apply patch:
+# patch -p0 -i ~/github/sa6mwa/miscellaneous/wsjtx-2.0.1-ft8-auto.patch
+## Repacke wstjx.tgz:
+# tar -czf wsjtx.tgz wsjtx
+# md5sum wsjtx.tgz > wsjtx.tgz.md5sum
+# rm -r wsjtx
+# cd ..
+## Build as normal:
+# mkdir build
+# cd build
+# cmake -DWSJT_SKIP_MANPAGES=ON -DWSJT_GENERATE_DOCS=OFF ../
+# cmake --build .
+# sudo cmake --build . --target install
+## Enjoy full auto FT8 CQ...
+--- wsjtx/widgets/mainwindow.cpp.orig	2019-02-25 04:48:37.000000000 +0100
++++ wsjtx/widgets/mainwindow.cpp	2019-06-17 00:10:28.983296883 +0200
+@@ -3725,7 +3725,7 @@
+       if(m_nextCall!="") {
+         useNextCall();
+       } else {
+-        auto_tx_mode (false);
++        //auto_tx_mode (false);
+         if(b) {
+           m_ntx=6;
+           ui->txrb6->setChecked(true);
