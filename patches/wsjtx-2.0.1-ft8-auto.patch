@@ -5,7 +5,7 @@
 # cd wsjtx-2.0.1/src
 # tar -xzf wsjtx.tgz
 ## Apply patch:
-# patch -p0 -i ~/github/sa6mwa/miscellaneous/wsjtx-2.0.1-ft8-auto.patch
+# patch -p0 -i ~/github/sa6mwa/miscellaneous/patches/wsjtx-2.0.1-ft8-auto.patch
 ## Repacke wstjx.tgz:
 # tar -czf wsjtx.tgz wsjtx
 # md5sum wsjtx.tgz > wsjtx.tgz.md5sum
