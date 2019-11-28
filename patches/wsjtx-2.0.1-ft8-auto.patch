@@ -12,6 +12,22 @@
 ## make adjustments. Don't expect to be able to leave WSJT-X running for hours
 ## without interaction.
 ##
+##
+## You need the following dependencies if you run Ubuntu Mate 18.04 Bionic
+## or 18.10 Cosmic (apt-get install ...):
+##
+## build-essential
+## gfortran
+## cmake
+## texinfo
+## libfftw3-dev
+## libhamlib-dev
+## qtmultimedia5-dev
+## libqt5multimedia5-plugins
+## libqt5serialport5-dev
+## libudev-dev
+##
+##
 ## Download source tarball from
 ## https://www.physics.princeton.edu/pulsar/K1JT/wsjtx.html
 ## Unpack main tgz followed by wsjtx.tgz in the src/ directory:
