@@ -26,16 +26,19 @@
 ## libqt5multimedia5-plugins
 ## libqt5serialport5-dev
 ## libudev-dev
+## qttools5-dev-tools
+## qttools5-dev
+## libusb-1.0-0-dev
 ##
 ##
 ## Download source tarball from
 ## https://www.physics.princeton.edu/pulsar/K1JT/wsjtx.html
 ## Unpack main tgz followed by wsjtx.tgz in the src/ directory:
-# tar -xzf wsjtx-2.0.1.tgz
-# cd wsjtx-2.0.1/src
+# tar -xzf wsjtx-2.1.2.tgz
+# cd wsjtx-2.1.2/src
 # tar -xzf wsjtx.tgz
 ## Apply patch:
-# patch -p0 -i ~/github/sa6mwa/miscellaneous/patches/wsjtx-2.0.1-ft8-auto.patch
+# patch -p0 -i ~/github/sa6mwa/miscellaneous/patches/wsjtx-2.1.2-ft8-auto.patch
 ## Repackage wstjx.tgz:
 # tar -czf wsjtx.tgz wsjtx
 # md5sum wsjtx.tgz > wsjtx.tgz.md5sum
@@ -66,9 +69,9 @@
 ## your fellow ham's right to enjoy the hobby or interfere with other radio
 ## traffic.
 ##
---- wsjtx/widgets/mainwindow.cpp.orig	2019-06-18 01:02:45.662235580 +0200
-+++ wsjtx/widgets/mainwindow.cpp	2019-06-18 01:08:31.279107165 +0200
-@@ -3725,7 +3725,13 @@
+--- wsjtx/widgets/mainwindow.cpp.orig	2019-11-26 15:22:32.000000000 +0100
++++ wsjtx/widgets/mainwindow.cpp	2019-11-28 23:57:43.861567366 +0100
+@@ -3841,7 +3841,13 @@
        if(m_nextCall!="") {
          useNextCall();
        } else {
@@ -83,9 +86,9 @@
          if(b) {
            m_ntx=6;
            ui->txrb6->setChecked(true);
---- wsjtx/Configuration.ui.orig	2019-06-18 01:33:50.825495074 +0200
-+++ wsjtx/Configuration.ui	2019-06-18 01:34:24.117702030 +0200
-@@ -1774,7 +1774,7 @@
+--- wsjtx/Configuration.ui.orig	2019-11-26 15:22:32.000000000 +0100
++++ wsjtx/Configuration.ui	2019-11-28 23:57:43.865563122 +0100
+@@ -1781,7 +1781,7 @@
               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check to have QSOs logged automatically, when complete.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
              <property name="text">
@@ -94,9 +97,9 @@
              </property>
             </widget>
            </item>
---- wsjtx/widgets/logqso.cpp.orig	2019-06-18 01:31:02.627999581 +0200
-+++ wsjtx/widgets/logqso.cpp	2019-06-18 01:33:04.185159561 +0200
-@@ -104,11 +104,12 @@
+--- wsjtx/widgets/logqso.cpp.orig	2019-11-26 15:22:32.000000000 +0100
++++ wsjtx/widgets/logqso.cpp	2019-11-28 23:57:43.865563122 +0100
+@@ -103,11 +103,12 @@
  
    using SpOp = Configuration::SpecialOperatingActivity;
    auto special_op = m_config->special_op_id ();

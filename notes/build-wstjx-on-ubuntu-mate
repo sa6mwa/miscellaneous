@@ -11,5 +11,8 @@ qtmultimedia5-dev
 libqt5multimedia5-plugins
 libqt5serialport5-dev
 libudev-dev
+qttools5-dev-tools
+qttools5-dev
+libusb-1.0-0-dev
 
 # See build instructions in ../patches/wsjtx-2.0.1-ft8-auto.patch
