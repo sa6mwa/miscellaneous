@@ -10,6 +10,8 @@ qtmultimedia5-dev
 libqt5multimedia5-plugins
 libqt5serialport5-dev
 libudev-dev
+qttools5-dev-tools
+qttools5-dev
 )
 echo
 echo "WARNING: Only for Ubuntu Mate (not tested on Ubuntu Desktop)."
