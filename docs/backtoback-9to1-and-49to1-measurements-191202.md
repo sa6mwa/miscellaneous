@@ -1,0 +1,278 @@
+# 9:1 and 49:1 transformer loss
+
+**By [SA6MWA Michel][qrz]**  
+*December 2019*
+
+I wanted to measure the loss through two types of transformers I have made
+myself: the very popular 49:1 used for End-Fed Half Wave (EFHW) antennas and
+the popular, but sometimes maligned, 9:1 *unun* used for *random wire* or
+long wire antennas. On my YouTube channel [Utesändaren][outsender] (which is in
+Swedish) I have tried to debunk the pseudo-science floating around on the net
+about the inefficiency of end-fed, non-resonant wires and take the scientific
+standpoint that all wires are equally efficient whether they are fed in the
+middle or by the end (given the same length). Another misconception floating
+around is that the popular 49:1 (14 secondary windings, 2 primary windings on a
+FT240-43 or FT140-43) is a highly efficient transformer. Since I don't own a
+VNA, I decided to measure TL (transmit loss, or sometimes called thru-loss)
+through 2 transformers back-to-back using a simple power meter connected to a
+dummy load using an ordinary transceiver.
+
+Transmit Loss was measured using a FT817 at 5W CW. The first measurements were
+for reference and connected the FT817 directly to a MAAS RS600 power/swr-meter
+via a 200mm RG58 lead (with PL259 bakelite connectors). The ANT connection on
+the RS600 had a homemade dummyload connected directly via F and UHF adapters.
+The dummy load consisted of a set of 1% 3W resistors in parallel (50 ohm).
+
+The second measurements were done by connecting the FT817 via the 200mm patch
+lead to one of the transformer's SO239 sockets. Two 9 to 1 transformers were
+connected together, including ground (using the transformer's ground plugs).
+The antenna wire connector was connected to the other transformer's antenna
+wire connector using a 50mm insulated copper wire. The ground of both
+transformers were also connected together in the same way, with about 50mm of
+insulated copper wire.
+
+The transformers were two 9:1 trifilar-design wound 6 times on FT140-61
+torroids each (1 torroid per transformer). The wire in both transformers were
+what we call FKUB, single strand from an electric installation cable,
+supposedly with PVC and some fireresistant insulation. None of the transformers
+used more ideal enemal wire.
+
+### The Math
+
+The dB loss was calculated from the power ratio between the reference
+measurement (in Watts) and the value with the two transformers in line using
+10Log10. GNU `bc` was used for the calculations with the following commands...
+
+```console
+$ bc -l
+ratio=0.9
+10*l(ratio)/l(10)
+-.4573
+```
+
+The following function was defined to simplify the process...
+
+```bc
+define log10 (x) { return (10*l(x)/l(10)); }
+log10(0.5)
+-3.0102
+
+log10(0.6/3.5)
+-7.6599
+```
+
+### Loss through two 9:1 transformers
+
+| QRG kHz | Reference (Watts) | Back to back 9:1 (W)  | dB    | Loss dB/2 |
+|--------:|------------------:|----------------------:|------:|----------:|
+| 1800    | 3.5               | 1.1                   | 5.03  | 2.52      |
+| 3500    | 4.6               | 3.7                   | 0.946 | 0.473     |
+| 7000    | 4.9               | 4.8                   | 0.09  | 0.045     |
+| 10100   | 5.0               | 5.0                   | 0     | 0         |
+| 14000   | 5.0               | 4.8                   | 0.177 | 0.089     |
+| 18068   | 5.0               | 4.725                 | 0.246 | 0.123     |
+| 28000   | 5.1               | 4.6                   | 0.448 | 0.224     |
+
+The *dB* column is the ratio between reference and back-to-back through two
+transformers. Loss through one transformer is assumed to be dB/2.
+
+The lowest loss was at 30m where I could not detect a difference in posistion
+of the needle compared to reference on the power meter. The highest loss was at
+160m with a loss of 2.52 dB. On 80m it was below 0.5 and above 80 it was below
+0.3.
+
+### 49:1 back to back
+
+Two 49:1 transformers
+
+| QRG kHz | Reference (Watts) | Back to back 49:1 (W) | dB    | Loss dB/2 |
+|--------:|------------------:|----------------------:|------:|----------:|
+| 1800    | 3.5               | 0.6                   | 7.66  | 3.83      |
+| 3500    | 4.6               | 1.8                   | 4.07  | 2.035     |
+| 7000    | 4.9               | 2.5                   | 2.92  | 1.46      |
+| 10100   | 5.0               | 2.725                 | 2.64  | 1.32      |
+| 14000   | 5.0               | 2.8                   | 2.52  | 1.26      |
+| 18068   | 5.0               | 2.8                   | 2.52  | 1.26      |
+| 28000   | 5.1               | 2.25                  | 3.55  | 1.775     |
+
+The lowest loss was at 20m and 17m with a loss of 1.26 dB. The highest loss was
+at 160m with a loss of 3.83 dB, meaning more than half the power (58.6%) is
+lost in the transformer. At 80m loss was below 3 dB, but still 40% of
+transmitted power was lost in the transformer. At 40m through 10m the losses
+are decent around 25-30%.
+
+## 9:1 system loss
+
+Since a 9:1 *randomwire* requires an ATU (antenna tuner) and you usually have a
+relatively high SWR in the coax - does that combined loss make the 9:1 total
+system loss worse than a matched 49:1 end-fed halfwave?
+
+Even though the 49:1 was OK between 40m and 17m, it was nowhere near as good as
+the 9:1 in the same range (near 0 dB loss). You need to use an antenna tuner
+(impedance matching device) with a 9:1 *randomwire* installation and there will
+be SWR loss in the coax and some loss in the impedance matching device.
+
+### Transmission line loss
+
+We begin with the transmission line. I use RG-58 when operating portable, so
+let's see what the losses are in this type of coax. All numbers were derived
+from [CO8TW Coax Calculator][coaxcalculator] on qsl.net.
+
+Belden 8219 (RG58A) was chosen as the cable with lengths of 10 and 30 meters.
+It's uncommon to feed end-fed antennas with a long run of coax, especielly when
+portable, as the transformer is usually not mounted high. I personally never
+use more than 5-7 meters of coax (RG-58), unless it is a horizontal dipole.
+This still allows me to get the transformer up a few meters in the air just
+above my operating position.
+
+A 9:1 *randomwire* installation usually never result in a SWR of more than 5:1,
+usually a lot less. An end-fed resonant halfwave wire will typically have an
+impedance no more than 3000 ohms (reference needed). 3000 divided by 9 is 333
+ohms, divided by 50 is a SWR of 6.66 to 1. This will be or be near the highest
+possible impedance in a typical randomwire installation. When mounting a
+randomwire or end-fed halfwave as a sloper and relatively close to ground (vs
+operating frequency), impedance is usually much lower resulting in a SWR of
+less than 5:1 and mostly less than 3:1 with the 9:1 transformer. The same
+installation makes it possible to use the 49:1 transformer with true halfwave
+wires.
+
+SWR losses for 10m coax...
+
+| QRG kHz   | 10m SWR 1:1 total loss  | 10m SWR 5:1 total loss  |
+|----------:|------------------------:|------------------------:|
+| 1800      | 0.174                   | 0.434                   |
+| 3500      | 0.245                   | 0.6                     |
+| 7000      | 0.35                    | 0.839                   |
+| 10100     | 0.424                   | 0.999                   |
+| 14000     | 0.503                   | 1.167                   |
+| 18068     | 0.575                   | 1.316                   |
+| 28000     | 0.726                   | 1.616                   |
+
+SWR losses for 30m coax...
+
+| QRG kHz   | 30m SWR 1:1 total loss  | 30m SWR 5:1 total loss  |
+|----------:|------------------------:|------------------------:|
+| 1800      | 0.523                   | 1.209                   |
+| 3500      | 0.734                   | 1.632                   |
+| 7000      | 1.05                    | 2.212                   |
+| 10100     | 1.271                   | 2.588                   |
+| 14000     | 1.508                   | 2.97                    |
+| 18068     | 1.725                   | 3.304                   |
+| 28000     | 2.178                   | 3.958                   |
+
+No doubt, 30m RG-58 is not recommended, especially not when using a 9:1
+transformer with a so-called randomwire antenna.
+
+### Combined loss
+
+In the table below we assume 0.5 dB loss in a T match ATU at an SWR of 5:1
+([reference][atuloss]) in addition to transmission line loss according to
+previous tables and the 9:1 transformer losses previously measured.
+
+ATU losses can be more or less depending on several circumstances, but will be
+tolerable with an SWR of 5:1 with the *usual* impedance and reactance seen with
+most randomwire installations.
+
+The combined loss with the 9:1 transformer (ATU + feedline + transformer) is:
+> **9:1 transformer loss + feedline loss at SWR 5:1 + 0.5 dB ATU loss**
+
+We assume a halfwave wire with the 49:1 and a perfect match (50 ohms in the
+coaxial cable), thus the combined loss of the 49:1 EFHW is in this example:
+> **49:1 transformer loss + feedline loss at 1:1**
+
+#### With 10m of coax
+
+| QRG kHz | 9:1 worst case loss (dB)  | 49:1 matched loss (dB)  |
+|--------:|--------------------------:|------------------------:|
+| 1800    | 3.454                     | 4.004                   |
+| 3500    | 1.573                     | 2.28                    |
+| 7000    | 1.384                     | 1.81                    |
+| 10100   | 1.499                     | 1.744                   |
+| 14000   | 1.756                     | 1.754                   |
+| 18068   | 1.939                     | 1.835                   |
+| 28000   | 2.340                     | 2.501                   |
+
+The 49:1 EFHW has more loss on all bands compared to a 9:1 *randomwire* except
+on 20m and 17m. With 30m coax the results will favour the 49:1...
+
+#### With 30m of coax
+
+| QRG kHz | 9:1 worst case loss (dB)  | 49:1 matched loss (dB)  |
+|--------:|--------------------------:|------------------------:|
+| 1800    | 4.229                     | 4.353
+| 3500    | 2.605                     | 2.769
+| 7000    | 2.757                     | 2.51
+| 10100   | 3.088                     | 2.591
+| 14000   | 3.559                     | 2.768
+| 18068   | 3.927                     | 2.985
+| 28000   | 4.682                     | 3.953
+
+In this example the 49:1 EFHW is only worse on 160m and 80m. There is a
+significant difference on 14m and 17m. However, there are significant losses in
+the coax on 14m, 17m and 10m due to its length.
+
+### Comparison with a horizontal half wave dipole
+
+Since both the 9:1 and the 49:1 are multiband antennas (perhaps with the
+exception of the 9:1 which can theoretically be used on the entire HF spectrum)
+they are compromised designs. A more efficient antenna at a specific design
+frequency would be a horizontal dipole. The problem is that it will most likely
+only work on one band (a 40m dipole can work on 15m without an ATU).
+
+Let's assume that we compare the 9:1 (with system losses) to a dipole on 30m.
+We will need a longer coax, let's assume it's 20m compared to 10m with the 9:1.
+The SWR in the coax will be 1.4 since we assume the dipole is 70 ohms. The loss
+according to [CO8TW Coax Calculator][coaxcalculator] in 20m of RG-58 at 10.1
+MHz is 0.887 dB which is the total loss assumed with this single band dipole.
+On my YouTube channel I have references that an end-fed wire is almost
+identically as efficient as a center-fed wire, so we assume the same loss in
+the antenna wire. Radiation pattern can be different however.
+
+The *randomwire* system loss is 1.499 dB while the loss in the dipole is 0.887
+dB (since we usually need a longer coax even when configuring it as a sloper).
+The difference is 0.612 dB.
+
+Let's take the 80m band instead, the loss in the dipole's coax is 0.515 dB,
+loss in the 9:1 system is 1.573 dB, a difference of 1.1 dB. Given the fact that
+the SWR will probably be lower than 5:1 with the 9:1 *randomwire*, the
+difference compared to a half wave dipole is not very significant. On 160m,
+however, the loss is 3 dB compared to the dipole - that is pretty significant.
+We are not comparing the same length of coax, but you can never feed a
+center-fed horizontal dipole with a short coax anyway.
+
+When comparing the dipole to a 49:1 EFHW the difference is greater, especially
+in the lower end of HF, but still not highly significant (unless trying to use
+it on 160m). Remember that 6 dB loss is 1 [S unit][smeter], 1.1 dB is
+unnoticeable, 3 dB is half an S unit. Transmit and receive are affected equally
+using any antenna (if you have loss on transmit, you have an equal amount of
+loss on receive, and vice versa).
+
+## Conclusion
+
+With 10m coax, you can't (or you probably can) argue against the fact that the
+9:1 *randomwire* is more efficient despite coax and ATU losses in the lower
+part of HF compared to the 49:1 EFHW. The 49:1 is better suited for 20m and 17m
+according to my numbers.
+
+There may be situations where you can't use an ATU or don't want to carry
+around an external ATU. Provided that you don't want to use 160m, then a 49:1
+EFHW is still an excellent choice. It's well below 3 dB in loss above 160m, and
+3 dB is half an S unit. An EFHW can easily be made to operate on at least 2
+major bands (3 by adding a capacitor) using the same wire (for example 40m and
+20m). They are easier to mechanically tune compared to dipoles and
+off-center-fed dipoles (only one end to adjust).
+
+The 9:1 *randomwire* with an ATU is not only a convenient full-spectrum HF
+antenna, it's also quite efficient according to my numbers.
+
+The conclusion is that both systems work, and both provide good enough
+efficiency to work contacts on low power. Both are below 3 dB from 80m to 10m.
+
+VRY 73 DE SA6MWA  
+SK / EE
+
+[qrz]: https://www.qrz.com/db/SA6MWA
+[outsender]: https://www.youtube.com/c/utesandaren
+[coaxcalculator]: https://www.qsl.net/co8tw/Coax_Calculator.htm
+[atuloss]: https://owenduffy.net/blog/?p=7035
+[smeter]: https://en.wikipedia.org/wiki/S_meter
