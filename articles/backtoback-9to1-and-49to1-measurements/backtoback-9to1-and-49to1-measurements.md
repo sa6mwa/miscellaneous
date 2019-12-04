@@ -83,7 +83,6 @@ log10(0.6/3.5)
 | 18068   | 5.0               | 4.725                 | 0.246 | 0.123     |
 | 28000   | 5.1               | 4.6                   | 0.448 | 0.224     |
 
-[Gnuplot file of transformer loss][gpixfrmrloss]
 
 The *dB* column is the ratio between reference and back-to-back through two
 transformers. Loss through one transformer is assumed to be dB/2.
@@ -112,6 +111,10 @@ at 160m with a loss of 3.83 dB, meaning more than half the power (58.6%) is
 lost in the transformer. At 80m loss was below 3 dB, but still 40% of
 transmitted power was lost in the transformer. At 40m through 10m the losses
 are decent around 25-30%.
+
+![Gnuplot 9:1 vs 49:1 transformer loss][svgxfrmrloss]
+
+[Gnuplot file of transformer loss][gpixfrmrloss]
 
 ## 9:1 system loss
 
@@ -290,6 +293,8 @@ coaxial cable), thus the combined loss of the 49:1 EFHW is in this example:
 | 18068   | 1.939                     | 1.835                   |
 | 28000   | 2.340                     | 2.501                   |
 
+![Gnuplot 9:1 vs 49:1 system loss][svgsysloss]
+
 [Gnuplot file of system loss][gpisysloss]
 
 The 49:1 EFHW has more loss on all bands compared to a 9:1 *random wire* except
@@ -382,5 +387,7 @@ system loss.
 [smeter]: https://en.wikipedia.org/wiki/S_meter
 [arrltnetwork]: http://www.arrl.org/files/file/Technology/tis/info/pdf/9501046.pdf
 [gpixfrmrloss]: tl-transformers-9to1vs49to1.gpi
+[svgxfrmrloss]: tl-transformers-9to1vs49to1.svg
 [gpisysloss]: tl-system-9to1vs49to1.gpi
+[svgsysloss]: tl-system-9to1vs49to1.svg
 [gsmc]: http://www.radioteknos.it/ik5nax_en.html

@@ -1,3 +1,5 @@
+set terminal svg size 800,600
+set output 'tl-transformers-9to1vs49to1.svg'
 set title 'Transmission Loss through 9:1 and 49:1 transformer'
 set key vertical
 set key at 23000,0.5 top left
