@@ -5,17 +5,19 @@
 
 I wanted to measure the loss through two types of transformers I have made
 myself: the very popular 49:1 used for End-Fed Half Wave (EFHW) antennas and
-the popular, but sometimes maligned, 9:1 *unun* used for *random wire* or
-long wire antennas. On my YouTube channel [Utesändaren][outsender] (which is in
+the popular, but sometimes maligned, 9:1 *unun* used for *random wire* or long
+wire antennas. On my YouTube channel [Utesändaren][outsender] (which is in
 Swedish) I have tried to debunk the pseudo-science floating around on the net
 about the inefficiency of end-fed, non-resonant wires and take the scientific
 standpoint that all wires are equally efficient whether they are fed in the
-middle or by the end (given the same length). Another misconception floating
-around is that the popular 49:1 (14 secondary windings, 2 primary windings on a
-FT240-43 or FT140-43) is a highly efficient transformer. Since I don't own a
-VNA, I decided to measure TL (transmission loss, or sometimes called thru-loss)
-through 2 transformers back-to-back using a simple power meter connected to a
-dummy load using an ordinary transceiver.
+middle or by the end (given the same length) provided that you can match the
+impedance.
+
+Another misconception floating around is that the popular 49:1 (14 secondary
+windings, 2 primary windings on a FT240-43 or FT140-43) is a highly efficient
+transformer. Since I don't own a VNA, I decided to measure TL (transmission
+loss, or sometimes called thru-loss) through 2 transformers back-to-back using
+a simple power meter connected to a dummy load using an ordinary transceiver.
 
 Transmission Loss was measured using a FT817 at 5W CW. The first measurements
 were for reference and connected the FT817 directly to a MAAS RS600
@@ -40,9 +42,9 @@ insulated copper wire.
 
 The transformers were two 9:1 trifilar-design wound 6 times on FT140-61
 torroids each (1 torroid per transformer). The wire in both transformers were
-what we call FKUB, single strand from an electric installation cable,
-supposedly with PVC and some fireresistant insulation. None of the transformers
-used more ideal enemal wire.
+what we call FK cable, single strand from an electric installation cable,
+supposedly with PVC and some fire resistant insulation. None of the
+transformers used more ideal enamel wire.
 
 ### The Math
 
@@ -119,8 +121,9 @@ system loss worse than a matched 49:1 end-fed half-wave?
 
 Even though the 49:1 was OK between 40m and 17m, it was nowhere near as good as
 the 9:1 in the same range (near 0 dB loss). You need to use an antenna tuner
-(impedance matching device) with a 9:1 *random wire* installation and there will
-be SWR loss in the coax and some loss in the impedance matching device.
+(impedance matching device) with a 9:1 *random wire* installation and there
+will be SWR loss in the coax (unless using an external rugged ATU at the feed
+point) and some loss in the impedance matching device.
 
 ### Transmission line loss
 
@@ -129,7 +132,7 @@ let's see what the losses are in this type of coax. All numbers were derived
 from [CO8TW Coax Calculator][coaxcalculator] on qsl.net.
 
 Belden 8219 (RG58A) was chosen as the cable with lengths of 10 and 30 meters.
-It's uncommon to feed end-fed antennas with a long run of coax, especielly when
+It's uncommon to feed end-fed antennas with a long run of coax, especially when
 portable, as the transformer is usually not mounted high. I personally never
 use more than 5-7 meters of coax (RG-58), unless it is a horizontal dipole.
 This still allows me to get the transformer up a few meters in the air just
@@ -175,28 +178,98 @@ transformer with a so-called random wire antenna.
 
 ### Combined loss
 
-In the table below we assume 0.5 dB loss in a T match ATU (the most common
-type) at an SWR of 5:1 ([reference][atuloss]) in addition to transmission line
-loss according to previous tables and the 9:1 transformer losses previously
-measured. This is definitely a rough estimate.
+In the table below we assume 0.5 dB loss in the ATU at an SWR of 5:1
+([reference][atuloss]) in addition to transmission line loss according to
+previous tables in addition to the 9:1 transformer losses previously measured.
+This is definitely a rough estimate.
+
+#### ATU losses
 
 ATU losses can be more or less depending on several circumstances, but will be
-tolerable when the impedance of the antenna at the other end of the coax is not
-too low (not related to SWR in this case). Matching very low impedances (e.g
-below 25 ohms) with a T-network matching ATU may involve significant loss as
-heat in the ATU. According to one source, it can be [slightly more than 2 dB on
-80m][arrltnetwork].
+tolerable when the resistive part of the complex impedance of the antenna at
+the other end of the coax is not too low at the operating frequencies of
+choice. According to [this article][arrltnetwork], resistance need to be above
+50&#937; (&gt; 50j0) in one example on 160m to have a loss less than 0.5 dB.
+In *Figure 4* in previous reference loss is 1.1 dB when R is 10&#937;, but 0.2
+dB when R is 500&#937; on 160m. *Figure 3* shows edge cases, something which
+will most likely not occur with an automatic ATU, but the same thing applies
+here - low resistance, high loss. Maybe the loss is insignificant, but it can
+be high enough to unnecessarily make a small QRP ATU heat up.
 
-> According to my experience, a *random wire* used with the 9:1 transformer
-> should be more than half a wavelength long on the lowest operating frequency
-> in order to avoid too low impedance. The length of the coaxial cable will
-> determine at which frequencies the nodes of low impedance are.
+Given that the antenna wire is long enough to be efficient on the operating
+frequencies of choice, the length of the coaxial cable can have a big impact on
+which resistive load the ATU sees in the other end.
 
-You can check where the low impedance nodes are with an antenna analyzer. If
-the antenna analyzer indicates that a particular amateur band is in a low
-impedance area, you can adjust either the length of the antenna wire or the
-length of the coax to move the low impedance somewhere you are unlikely to
-operate.
+For example, a *random wire* antenna I have at home has a node of very low
+impedance at 17.0 MHz. It's not an amateur radio band or of any other interest
+to me, so it's good that the node is there and not on, for example 18 MHz. But
+let's say it was an amateur band of interest. The impedance at the end of my
+coax at 17.0 MHz is 8.6+j0.87&#937;. The VSWR is slightly below 6. There will
+be significant loss in the coax, which is the only thing I will have to worry
+about as ATU loss at such a high frequency as 17.0 MHz will in worst case
+scenario be around 0.5 dB. But let's assume we would want to improve it anyway
+(maybe pretend it's 80m, where the loss would be significant in the ATU and
+much less in the coax).
+
+While playing around with [GSMC - Smith Chart Calculator][gsmc] I added 90
+degrees of 50&#937; coax. 90 degrees is a quarter wave length and just happened
+to transform the low resistance to something much higher. 90 degrees is 2.9
+meters of extra coax, so losses will be insignificant. I could also remove 2.9m
+from the coax which should have the same effect. After adding the extra coax,
+the new impedance is 288-j29&#937;. According to *Figure 4* in the [ARRL
+article by W4ULD][arrltnetwork], this is close to optimal loss (at least for
+the 160m example). So from maximum loss to optimal loss by just adding the
+right length of coax.
+
+You may often hear that coax length *should not* matter, but in this type of
+antenna it does as it acts like a transmission line transformer (VSWR is the
+same though). You can find nodes of low impedance with an antenna analyzer at
+the end of your coax. They say you should not measure an antenna at the end of
+the coax, but at the antenna feed point. In this case, it may be less
+problematic as impedance at the feed point can change when you add coax in this
+type of antenna. It's easier to add or cut a coax you have already installed
+than cutting a coax exactly according to a Smith Chart only to find that it
+does not match theory.
+
+By adding or subtracting coax (transmission line) you can move the nodes of low
+impedance outside of the operating frequencies of choice (i.e outside of the
+amateur radio bands). A Smith Chart is an excellent, non-computational way to
+figure out which length will offset the impedance the most, but be sure to take
+measurements of several bands and simulate adding the same length of coax. At
+20m and above, maybe not worth it as the ATU loss is not significant on these
+higher frequencies, but if you want to work 80, 40 or 30m with the 9:1
+transformer, it's worth checking which impedance you have at these bands so
+that both the tuner is happy and you have low loss.
+
+If you haven't yet discovered how easy it is to transform any impedance to any
+other impedance with a Smith Chart, you should learn how to use one as soon as
+possible. There's a vast amount of videos on YouTube showing you how it works.
+
+Please remember that the antenna wire need to be long enough (preferably more
+than half a wave length on the lowest band of interest) or you risk
+experiencing a large section with low impedance that you will have a hard time
+moving, especially by adding or subtracting coax (better to extend the length
+of the antenna wire).
+
+```
+$ bc
+# 0.25 is another way of saying 90 degrees,
+# 0.5 is 180 degrees and 1.0 is 360 degrees.
+300/17.0*0.25
+4.4117
+# my Lappkabel RG58C/U has a velocity factor of 66%
+300/17.0*0.25*0.66
+2.9117
+```
+
+GSMC Smith Chart Calculator is available in most Linux distros...
+```
+sudo apt-get install gsmc
+# another option is linsmith
+sudo apt-get install linsmith
+```
+
+#### The Guesstimate
 
 The combined loss with the 9:1 transformer (ATU + feedline + transformer) is:
 > **9:1 transformer loss + feedline loss at SWR 5:1 + 0.5 dB ATU loss**
@@ -263,9 +336,9 @@ Let's take the 80m band instead, the loss in the dipole's coax is 0.515 dB,
 loss in the 9:1 system is 1.573 dB, a difference of 1.1 dB. Given the fact that
 the SWR will probably be lower than 5:1 with the 9:1 *random wire*, the
 difference compared to a half wave dipole is not very significant. On 160m,
-however, the loss is 3 dB compared to the dipole - that is pretty significant.
-We are not comparing the same length of coax, but you can never feed a
-center-fed horizontal dipole with a short coax anyway.
+however, the loss is 3 dB compared to the dipole which could be said to be
+significant (half an S unit). We are not comparing the same length of coax, but
+you can never feed a center-fed horizontal dipole with a short coax anyway.
 
 When comparing the dipole to a 49:1 EFHW the difference is greater, especially
 in the lower end of HF, but still not highly significant (unless trying to use
@@ -310,3 +383,4 @@ system loss.
 [arrltnetwork]: http://www.arrl.org/files/file/Technology/tis/info/pdf/9501046.pdf
 [gpixfrmrloss]: tl-transformers-9to1vs49to1.gpi
 [gpisysloss]: tl-system-9to1vs49to1.gpi
+[gsmc]: http://www.radioteknos.it/ik5nax_en.html
