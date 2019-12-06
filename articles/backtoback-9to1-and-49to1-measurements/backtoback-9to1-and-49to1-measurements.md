@@ -22,7 +22,7 @@ a simple power meter connected to a dummy load using an ordinary transceiver.
 Transmission Loss was measured using a FT817 at 5W CW. The first measurements
 were for reference and connected the FT817 directly to a MAAS RS600
 power/swr-meter via a 200mm RG58 lead (with PL259 bakelite connectors). The ANT
-connection on the RS600 had a homemade dummyload connected directly via F and
+connection on the RS600 had a homemade dummyload connected directly via N and
 UHF adapters. The dummy load consisted of a set of 1% 3W resistors in parallel
 (50 ohm).
 
