@@ -2,11 +2,11 @@ set terminal svg size 800,600
 set output 'tl-transformers-9to1vs49to1.svg'
 set title 'Transmission Loss through 9:1 and 49:1 transformer'
 set key vertical
-set key at 23000,0.5 top left
+set key at 32000,0.5 top left
 set xlabel 'kHz'
 set ylabel 'Loss dB'
 set grid ytics mytics xtics mxtics
-set yrange [3:0]
+set yrange [5:0]
 set tics font ", 7"
 set ytics 0.25
 set mytics 2
@@ -29,6 +29,7 @@ set style rect fc rgb "red" fs solid 0.3 noborder
 set obj rect from 24890, graph 0 to 24990, graph 1
 set style rect fc lt -1 fs solid 0.2 noborder
 set obj rect from 28000, graph 0 to 29700, graph 1
+set obj rect from 50000, graph 0 to 52000, graph 1
 $nineOne << EOD
 1800 2.52
 3500 0.473
@@ -37,6 +38,7 @@ $nineOne << EOD
 14000 0.089
 18068 0.123
 28000 0.224
+50000 0.5935
 EOD
 $fortyNineOne << EOD
 1800 3.83
@@ -46,6 +48,7 @@ $fortyNineOne << EOD
 14000 1.26
 18068 1.26
 28000 1.775
+50000 5.9287
 EOD
 plot '$nineOne' using 1:2 with lines lw 2 title '9:1' smooth mcsplines, \
 '$fortyNineOne' using 1:2 with lines lw 2 title '49:1' smooth mcsplines

@@ -1,6 +1,7 @@
 # 9:1 and 49:1 transformer loss
 
-**By [SA6MWA Michel][qrz]**  
+**By [SA6MWA Michel Blomgren][qrz]**  
+*sa6mwa@radiohorisont.se*  
 *December 2019*
 
 I wanted to measure the loss through two types of transformers I have made
@@ -82,7 +83,7 @@ log10(0.6/3.5)
 | 14000   | 5.0               | 4.8                   | 0.177 | 0.089     |
 | 18068   | 5.0               | 4.725                 | 0.246 | 0.123     |
 | 28000   | 5.1               | 4.6                   | 0.448 | 0.224     |
-
+| 50000   | 4.6               | 3.5                   | 1.187 | 0.5935    |
 
 The *dB* column is the ratio between reference and back-to-back through two
 transformers. Loss through one transformer is assumed to be dB/2.
@@ -105,12 +106,14 @@ Two 49:1 transformers
 | 14000   | 5.0               | 2.8                   | 2.52  | 1.26      |
 | 18068   | 5.0               | 2.8                   | 2.52  | 1.26      |
 | 28000   | 5.1               | 2.25                  | 3.55  | 1.775     |
+| 50000   | 4.6               | 0.3                   | 11.86 | 5.9287    |
 
-The lowest loss was at 20m and 17m with a loss of 1.26 dB. The highest loss was
-at 160m with a loss of 3.83 dB, meaning more than half the power (58.6%) is
-lost in the transformer. At 80m loss was below 3 dB, but still 40% of
+The lowest loss was at 20m and 17m with a loss of 1.26 dB. The highest loss on
+HF was at 160m with a loss of 3.83 dB, meaning more than half the power (58.6%)
+is lost in the transformer. At 80m loss was below 3 dB, but still 40% of
 transmitted power was lost in the transformer. At 40m through 10m the losses
-are decent around 25-30%.
+are decent around 25-30%. 75% is lost as heat in the transformer at 6m, but VHF
+was never really a design goal of this type of transformer.
 
 ![Gnuplot 9:1 vs 49:1 transformer loss][svgxfrmrloss]
 
@@ -163,6 +166,7 @@ SWR losses for 10m coax...
 | 14000     | 0.503                   | 1.167                   |
 | 18068     | 0.575                   | 1.316                   |
 | 28000     | 0.726                   | 1.616                   |
+| 50000     | 0.994                   | 2.112                   |
 
 SWR losses for 30m coax...
 
@@ -175,9 +179,33 @@ SWR losses for 30m coax...
 | 14000     | 1.508                   | 2.97                    |
 | 18068     | 1.725                   | 3.304                   |
 | 28000     | 2.178                   | 3.958                   |
+| 50000     | 2.981                   | 5.014                   | 
+
+#### My own measurements
+
+The following data was acquired by measuring 7.5m and 30m respectively of
+Lappkabel RG-58C/U mfg number 2170000 using the same method as with the
+transformers: FT817 as a signal generator and a MAAS RS600 power meter with a
+home-made dummy load.
+
+| QRG kHz   | Ref (W) | 7.5m RG58 (W) | TL7m dB | 30m RG58 (W)  | TL30m dB  |
+|----------:|--------:|--------------:|--------:|--------------:|----------:|
+| 1800      | 3.5     | 3.5           | 0       | 3.4           | 0.126     |
+| 3500      | 4.6     | 4.5           | 0.096   | 3.9           | 0.717     |
+| 7000      | 4.9     | 4.6           | 0.275   | 3.8           | 1.104     |
+| 10100     | 5.0     | 4.6           | 0.362   | 3.6           | 1.427     |
+| 14000     | 5.0     | 4.5           | 0.457   | 3.4           | 1.675     |
+| 18068     | 5.0     | 4.5           | 0.457   | 3.2           | 1.938     |
+| 28000     | 5.1     | 4.5           | 0.544   | 2.9           | 2.452     |
+| 50000     | 4.6     | 4.25          | 0.344   | 2.25          | 3.106     |
+
+Losses are comparable to the Belden 8219 reference. The difference can most
+likely be attributed to lack of precision in the measurement method or
+equipment.
 
 No doubt, 30m RG-58 is not recommended, especially not when using a 9:1
-transformer with a so-called random wire antenna.
+transformer with a *random wire* antenna as mismatch loss (SWR loss)
+will be high.
 
 ### Combined loss
 
@@ -191,13 +219,16 @@ This is definitely a rough estimate.
 ATU losses can be more or less depending on several circumstances, but will be
 tolerable when the resistive part of the complex impedance of the antenna at
 the other end of the coax is not too low at the operating frequencies of
-choice. According to [this article][arrltnetwork], resistance need to be above
-50&#937; (&gt; 50j0) in one example on 160m to have a loss less than 0.5 dB.
-In *Figure 4* in previous reference loss is 1.1 dB when R is 10&#937;, but 0.2
-dB when R is 500&#937; on 160m. *Figure 3* shows edge cases, something which
-will most likely not occur with an automatic ATU, but the same thing applies
-here - low resistance, high loss. Maybe the loss is insignificant, but it can
-be high enough to unnecessarily make a small QRP ATU heat up.
+choice. It is also important that the imaginary part is not too extreme (not
+more than &#177;j200 looks like a good ballpark figure).
+
+According to [this article][arrltnetwork], resistance need to be above 50&#937;
+(&gt; 50j0) in one example on 160m to have a loss less than 0.5 dB.  In *Figure
+4* in previous reference loss is 1.1 dB when R is 10&#937;, but 0.2 dB when R
+is 500&#937; on 160m. *Figure 3* shows edge cases, something which will most
+likely not occur with an automatic ATU, but the same thing applies here - low
+resistance, high loss. Maybe the loss is insignificant, but it can be high
+enough to unnecessarily make a small QRP ATU heat up.
 
 Given that the antenna wire is long enough to be efficient on the operating
 frequencies of choice, the length of the coaxial cable can have a big impact on
@@ -229,10 +260,10 @@ antenna it does as it acts like a transmission line transformer (VSWR is the
 same though). You can find nodes of low impedance with an antenna analyzer at
 the end of your coax. They say you should not measure an antenna at the end of
 the coax, but at the antenna feed point. In this case, it may be less
-problematic as impedance at the feed point can change when you add coax in this
-type of antenna. It's easier to add or cut a coax you have already installed
-than cutting a coax exactly according to a Smith Chart only to find that it
-does not match theory.
+problematic as both impedance and VSWR at the feed point can change when you
+add coax in this type of antenna. It's easier to add or cut a coax you have
+already installed than cutting a coax exactly according to a Smith Chart only
+to find that it does not match theory.
 
 By adding or subtracting coax (transmission line) you can move the nodes of low
 impedance outside of the operating frequencies of choice (i.e outside of the
@@ -292,27 +323,30 @@ coaxial cable), thus the combined loss of the 49:1 EFHW is in this example:
 | 14000   | 1.756                     | 1.754                   |
 | 18068   | 1.939                     | 1.835                   |
 | 28000   | 2.340                     | 2.501                   |
+| 50000   | 3.206                     | 6.923                   |
 
 ![Gnuplot 9:1 vs 49:1 system loss][svgsysloss]
 
 [Gnuplot file of system loss][gpisysloss]
 
 The 49:1 EFHW has more loss on all bands compared to a 9:1 *random wire* except
-on 20m and 17m. With 30m coax the results will favour the 49:1...
+on 20m and 17m (and perhaps also 15m, but that was not measured). With 30m coax
+the results will favour the 49:1...
 
 #### With 30m of coax
 
 | QRG kHz | 9:1 worst case loss (dB)  | 49:1 matched loss (dB)  |
 |--------:|--------------------------:|------------------------:|
-| 1800    | 4.229                     | 4.353
-| 3500    | 2.605                     | 2.769
-| 7000    | 2.757                     | 2.51
-| 10100   | 3.088                     | 2.591
-| 14000   | 3.559                     | 2.768
-| 18068   | 3.927                     | 2.985
-| 28000   | 4.682                     | 3.953
+| 1800    | 4.229                     | 4.353                   |
+| 3500    | 2.605                     | 2.769                   |
+| 7000    | 2.757                     | 2.51                    |
+| 10100   | 3.088                     | 2.591                   |
+| 14000   | 3.559                     | 2.768                   |
+| 18068   | 3.927                     | 2.985                   |
+| 28000   | 4.682                     | 3.953                   |
+| 50000   | 6.108                     | 8.91                    |
 
-In this example the 49:1 EFHW is only worse on 160m and 80m. There is a
+In this example the 49:1 EFHW is only worse on 160m, 80m and 6m. There is a
 significant difference on 14m and 17m. However, there are significant losses in
 the coax on 14m, 17m and 10m due to its length.
 
@@ -356,19 +390,23 @@ loss on receive, and vice versa).
 
 With 10m coax, you can't (or you probably can) argue against the fact that the
 9:1 *random wire* is more efficient despite coax and ATU losses in the lower
-part of HF compared to the 49:1 EFHW. The 49:1 is better suited for 20m and 17m
-according to my numbers.
+part of HF and 6m compared to the 49:1 EFHW. Transformer loss in the 49:1 is 1
+S-unit on 6m compared to 0.6 dB loss in the 9:1 transformer. It was interesting
+to find out that a 9:1 *random wire* also works well on 6m with half an S-unit
+system loss. I will however not use a 49:1 on 6m. The 49:1 is better suited for
+20m and 17m according to my numbers.
 
 There may be situations where you can't use an ATU or don't want to carry
-around an external ATU. Provided that you don't want to use 160m, then a 49:1
-EFHW is still an excellent choice. It's well below 3 dB in loss above 160m, and
-3 dB is half an S unit. An EFHW can easily be made to operate on at least 2
-major bands (3 by adding a capacitor) using the same wire (for example 40m and
-20m). They are easier to mechanically tune compared to dipoles and
+around an external ATU. Provided that you don't want to use 160m and 6m, then a
+49:1 EFHW is still an excellent choice. It's well below 3 dB in loss above
+160m, and 3 dB is half an S unit. An EFHW can easily be made to operate on at
+least 2 major bands (3 by adding a capacitor) using the same wire (for example
+40m and 20m). They are easier to mechanically tune compared to dipoles and
 off-center-fed dipoles (only one end to adjust).
 
 The 9:1 *random wire* with an ATU is not only a convenient full-spectrum HF
-antenna, it's also quite efficient according to my numbers.
+antenna that also works well on 6m, it's also quite efficient according to my
+numbers.
 
 The conclusion is that both systems work, and both provide good enough
 efficiency to work contacts on low power. Both are below 3 dB from 80m to 10m.
