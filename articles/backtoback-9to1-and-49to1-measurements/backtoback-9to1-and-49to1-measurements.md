@@ -397,7 +397,7 @@ system loss. I will however not use a 49:1 on 6m. The 49:1 is better suited for
 20m and 17m according to my numbers.
 
 There may be situations where you can't use an ATU or don't want to carry
-around an external ATU. Provided that you don't want to use 160m and 6m, then a
+around an external ATU. Provided that you don't want to use 160m or 6m, then a
 49:1 EFHW is still an excellent choice. It's well below 3 dB in loss above
 160m, and 3 dB is half an S unit. An EFHW can easily be made to operate on at
 least 2 major bands (3 by adding a capacitor) using the same wire (for example
