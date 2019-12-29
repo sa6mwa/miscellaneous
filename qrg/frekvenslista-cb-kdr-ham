@@ -1,0 +1,84 @@
+CB 11m: EU/A                               CB 10m: CRT HE / PRESIDENT H        CB 10m: CRT IE / PRESIDENT I
+01  26.965    13  27.115     26 27.265     01 28.765  15 28.935  29 29.095     01 29.215  15 29.385  29 29.545
+02  26.975    14  27.125     27 27.275     02 28.775  16 28.955  30 29.105     02 29.225  16 29.405  30 29.555
+03  26.985    15  27.135     28 27.285     03 28.785  17 28.965  31 29.115     03 29.235  17 29.415  31 29.565
+03A 26.995    15A 27.145     29 27.295     04 28.805  18 28.975  32 29.125     04 29.255  18 29.425  32 29.575
+04  27.005    16  27.155     30 27.305     05 28.815  19 28.985  33 29.135     05 29.265  19 29.435  33 29.585
+05  27.015    17  27.165     31 27.315     06 28.825  20 29.005  34 29.145     06 29.275  20 29.455  34 29.595
+06  27.025    18  27.175     32 27.325     07 28.835  21 29.015  35 29.155     07 29.285  21 29.465  35 29.605
+07  27.035    19  27.185     33 27.335     08 28.855  22 29.025  36 29.165     08 29.305  22 29.475  36 29.615
+07A 27.045    19A 27.195     34 27.345     09 28.865  23 29.055  37 29.175     09 29.315  23 29.505  37 29.625
+08  27.055    20  27.205     35 27.355     10 28.875  24 29.035  38 29.185     10 29.325  24 29.485  38 29.635
+09  27.065    21  27.215     36 27.365     11 28.885  25 29.045  39 29.195     11 29.335  25 29.495  39 29.645
+10  27.075    22  27.225     37 27.375     12 28.905  26 29.065  40 29.205     12 29.355  26 29.515  40 29.655
+11  27.085    23  27.255     38 27.385     13 28.915  27 29.075                13 29.365  27 29.525
+11A 27.095    24  27.235 USB 39 27.395     14 28.925  28 29.085                14 29.375  28 29.535
+12  27.105    25  27.245     40 27.405     29.100 > 29.200 = FM SIMPLEX        29.200 > 29.300 = ALL/AUTO/DIGI
+                                           29.200 > 29.300 = ALL/AUTO/DIGI     29.600 = FM CQ SIMPLEX
+                                                                               29.610 = FM SIMPLEX REPEATER
+
+SRBR / KDR 444 / PMR446                        AMATÖRRADIO VHF FM
+kdr1  444.600 MHz   pmr1  446.00625 MHz             SIMPLEX                                  RX/TX (-600khz)
+kdr2  444.650 MHz   pmr2  446.01875 MHz        V16  145.2000  Bemannade rymdfarkoster  RV46  145.5750/144.9750
+kdr3  444.800 MHz   pmr3  446.03125 MHz        V17  145.2125  Internet Gateway         RV47  145.5875/144.9875
+kdr4  444.825 MHz   pmr4  446.04375 MHz        V18  145.2250  Nödsamband               RV48  145.6000/144.0000
+kdr5  444.850 MHz   pmr5  446.05625 MHz        V19  145.2375  Internet Gateway         RV49  145.6125/144.0125
+kdr6  444.875 MHz   pmr6  446.06875 MHz        V20  145.2500  QRSS CW                  RV50  145.6250/144.0250
+kdr7  444.925 MHz   pmr7  446.08125 MHz        V21  145.2625                           RV51  145.6375/145.0375
+kdr8  444.975 MHz   pmr8  446.09375 MHz        V22  145.2750                           RV52  145.6500/145.0500
+                                               V23  145.2875  Internet Gateway         RV53  145.6625/145.0625
+VHF JAKT OCH JORDBRUK                          V24  145.3000  RTTY                     RV54  145.6750/145.0750
+jakt1     155.425 MHz                          V25  145.3125                           RV55  145.6875/145.0875
+jakt2     155.475 MHz                          V26  145.3250                           RV56  145.7000/145.1000
+jakt3 L1  155.500 MHz                          V27  145.3375  Internet Gateway         RV57  145.7125/145.1125
+jakt4 L2  155.525 MHz                          V28  145.3500                           RV58  145.7250/145.1250
+allmän 5  156.000 MHz                          V29  145.3625                           RV59  145.7375/145.1375
+jakt6     155.400 MHz                          V30  145.3750  DV anrop                 RV60  145.7500/145.1500
+jakt7     155.450 MHz                          V31  145.3875                           RV61  145.7625/145.1625
+                                               V32  145.4000                           RV62  145.7750/145.1750
+HF                                             V33  145.4125                           RV63  145.7875/145.1875
+RAF VOLMET (Cornwall UK)  5450 kHz             V34  145.4250                           RYMD  145.8000/145.2000
+RAF VOLMET                11253 kHz            V35  145.4375
+Shannon Volmet (Ireland)  5505 kHz             V36  145.4500
+BBC                       7485 kHz             V37  145.4625
+BBC                       15400 kHz            V38  145.4750
+RUS Military Marker D     5153.7 kHz           V39  145.4875
+RUS Squeaky Wheel         3828 kHz             V40  145.5000  FM anrop
+Pinneberg Met Fax (DE)    3855 kHz             V41  145.5125
+English Man E07 (Moscow)  10717 kHz            V42  145.5250  GB2RS News (UK)
+UVB-76 The Buzzer         4625 kHz             V43  145.5375
+                                               V44  145.5500
+                                               V45  145.5625
+
+AMATÖRRADIO - KORTVÅG                                   BND QRG kHz       MODE        BND QRG kHz       MODE        
+                                                        160 1810-1838     CW          17m 18100         PSK CF     
+RS - READABILITY               SSB QRG kHz              160 1838-1840     DIG PSK1838 17m 18109-18111   IBP        
+5  Perfectly readable          160m      1840-2000      160 1840-2000     SSB         17m 18111-18168   SSB CF     
+4  Readable with practically   10W 1850-1900 1950-2000  160 1850-1900     MAX 10W PEP 17m 18160         SSB QUF    
+   no difficulty               80m TEST  3600-3650      160 1950-2000     MAX 10W PEP 15m 21000-21070   CW         
+3  Readable with considerable  80m       3650-3775      80m 3500-3570     CW CF=00-10 15m 21070-21149   DIGI       
+   difficulty                  80m DX CF 3775-3800      80m 3570-3580     DIGI        15m 21080         PSK        
+2  Barely readable             80m QUF   3760           80m 3580-3590     PSK         15m 21149-21151   IBP        
+1  Unreadable                  60m 15W   5354-5366 USB  80m 3600-3775     SSB         15m 21151-21450   SSB        
+STRENGTH                       40m TEST  7050-7100      80m 3775-3800     SSB DX CF   15m 21360         SSB QUF    
+9  Extremely strong signal     40m       7100-7130      80m 3760          SSB QUF     12m 24890-24915   CW CF      
+7  Moderately good signal      40m TEST  7130-7175      60m 5351.5-5354.0 CW/DIGI 15W 12m 24915-24929   DIGI CF    
+5  Fairly good signal          40m DX    7175-7200      60m 5354.0-5366.0 SSB USB 15W 12m 24920         PSK CF     
+3  Weak signal                 40m QUF   7110           60m 5366.0-5366.5 SMALBND 15W 12m 24929-24931   IBP        
+1  Faint signal, barely        20m CF    14101-14125    40m 7000-7040     CW          12m 24931-24990   SSB CF     
+   perceptible                 20m TEST  14125-14300    40m 7040-7050     DIGI        10m 28000-28070   CW         
+QRX I will call agn at h on kc 20m CF    14300-14350    40m 7050-7175     SSB         10m 28070-28190   DIGI       
+QRQ Send faster                20m QUF   14300          40m 7175-7200     SSB DX      10m 28120         PSK        
+QRS Send slower                17m WARC  18111-18168    40m 7110          SSB QUF     10m 28300-28320   DIGI/MGM   
+QRL I am busy / Busy?          15m       21151-21450    30m 10100-10130   CW 150W CF  10m 28320-29100   SSB        
+QRV I am ready / Ready?        15m QUF   21360          30m 10130-10150   DIG 150W CF 10m 29100-29200   FM SX      
+QSM Repeat last telegram       12m WARC  24931-24990    30m 10142         PSK CF      10m 29200-29300   DIGI       
+QRU I have no traffic/more 4 u 10m       28320-29100    20m 14000-14070   CW          10m 29520-29590   FM rptr in 
+QRN Being troubled by static   10m FM SX 29600          20m 14070         PSK         10m 29600         FM SX anrop
+QRM Being interfered with      10m FM SX rptr 29610     20m 14070-14099   DIGI        10m 29610         FM SX rptr 
+QUF Received distress call     CF = Contest Free        20m 14099-14101   IBP         10m 29620-29700   FM rptr ut 
+QTU Stn open between hours...  QUF = IARU Region 1      20m 14101-14112   DIGI CF     6m  50000-50100   CW         
+QTR Correct time                     Emergency QRG      20m 14112-14350   SSB         6m  50100-50300   SSB        
+                                                        20m 14300         SSB QUF CF  6m  50300-50400   DIGI       
+                                                        17m 18068-18095   CW CF       6m  50305         PSK        
+                                                        17m 18095-18109   DIGI CF     6m  50500-52000   FM etc     
