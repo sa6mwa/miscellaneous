@@ -31,7 +31,8 @@ UHF adapters. The dummy load consisted of a set of 1% 3W resistors in parallel
 > according to the power meter). The hidden menu of my FT817 (pressing A+B+C
 > when powering on) shows ``24 HF1-HI`` set to ``98`` (160m RF PWR). It might
 > be set too low or the power meter does not handle 160m very well. This might
-> have affected the 160m results.
+> have affected the 160m results. Update: seems like the power meter is not
+> well calibrated or suited to show correct values on all bands.
 
 The second measurements were done by connecting the FT817 via the 200mm patch
 lead to one of the transformer's SO239 sockets. Two 9 to 1 transformers were

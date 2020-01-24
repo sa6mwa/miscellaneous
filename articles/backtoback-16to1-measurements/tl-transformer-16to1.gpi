@@ -1,0 +1,48 @@
+set terminal svg size 800,600
+set output 'tl-transformer-16to1.svg'
+set title 'Transmission Loss through 16:1 transformer (volt balun)'
+set key vertical
+set key at 32000,0.5 top left
+set xlabel 'kHz'
+set ylabel 'Loss dB'
+set grid ytics mytics xtics mxtics
+set yrange [3:0]
+set tics font ", 7"
+set ytics 0.25
+set mytics 2
+set xtics 1000 rotate by 45 right
+set mxtics 2
+set style rect fc lt -1 fs solid 0.2 noborder
+set obj rect from 1800, graph 0 to 2000, graph 1
+set obj rect from 3500, graph 0 to 3800, graph 1
+set obj rect from 5351.5, graph 0 to 5366.5, graph 1
+set obj rect from 7000, graph 0 to 7200, graph 1
+set style rect fc rgb "red" fs solid 0.3 noborder
+set obj rect from 10100, graph 0 to 10150, graph 1
+set style rect fc lt -1 fs solid 0.2 noborder
+set obj rect from 14000, graph 0 to 14350, graph 1
+set style rect fc rgb "red" fs solid 0.3 noborder
+set obj rect from 18068, graph 0 to 18168, graph 1
+set style rect fc lt -1 fs solid 0.2 noborder
+set obj rect from 21000, graph 0 to 21450, graph 1
+set style rect fc rgb "red" fs solid 0.3 noborder
+set obj rect from 24890, graph 0 to 24990, graph 1
+set style rect fc lt -1 fs solid 0.2 noborder
+set obj rect from 28000, graph 0 to 29700, graph 1
+set obj rect from 50000, graph 0 to 52000, graph 1
+$sixteenOne << EOD
+1800 0.213
+2500 0.262
+3000 0.25
+3500 0.216
+4000 0.189
+5000 0.283
+6000 0.327
+7000 0.327
+10100 0.431
+14000 0.596
+18068 0.713
+28000 1.777
+50000 6.324
+EOD
+plot '$sixteenOne' using 1:2 with lines lw 2 title '16:1' smooth mcsplines
