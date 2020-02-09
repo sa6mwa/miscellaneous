@@ -1,3 +1,8 @@
+## NEW WORKING VERSION FOR WSJTX 2.1.2
+## Previous version did not remove an extra TX disable code added later than
+## wsjtx-2.0.1, thus the auto-QSO feature this patch was intended to provide did
+## not work. This is now fixed in this version.
+##
 ## DISCLAIMER:
 ## This patch merely enables features already present in WSJT-X, but disabled by
 ## choice by the author(s). It does not improve the automatic logic in WSJT-X.
@@ -69,25 +74,9 @@
 ## your fellow ham's right to enjoy the hobby or interfere with other radio
 ## traffic.
 ##
---- wsjtx/widgets/mainwindow.cpp.orig	2019-11-26 15:22:32.000000000 +0100
-+++ wsjtx/widgets/mainwindow.cpp	2019-11-28 23:57:43.861567366 +0100
-@@ -3841,7 +3841,13 @@
-       if(m_nextCall!="") {
-         useNextCall();
-       } else {
--        auto_tx_mode (false);
-+        /* If Call 1st is checked, consider this a CQ call.
-+         * In order to prevent CQ from automatically being transmitted,
-+         * uncheck Call 1st when answering CQs.
-+         */
-+        if (!ui->cbFirst->isChecked()) {
-+          auto_tx_mode (false);
-+        }
-         if(b) {
-           m_ntx=6;
-           ui->txrb6->setChecked(true);
---- wsjtx/Configuration.ui.orig	2019-11-26 15:22:32.000000000 +0100
-+++ wsjtx/Configuration.ui	2019-11-28 23:57:43.865563122 +0100
+diff -ur wsjtx-orig/Configuration.ui wsjtx/Configuration.ui
+--- wsjtx-orig/Configuration.ui	2019-11-26 15:22:32.000000000 +0100
++++ wsjtx/Configuration.ui	2020-02-09 17:52:26.115482730 +0100
 @@ -1781,7 +1781,7 @@
               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check to have QSOs logged automatically, when complete.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
@@ -97,8 +86,9 @@
              </property>
             </widget>
            </item>
---- wsjtx/widgets/logqso.cpp.orig	2019-11-26 15:22:32.000000000 +0100
-+++ wsjtx/widgets/logqso.cpp	2019-11-28 23:57:43.865563122 +0100
+diff -ur wsjtx-orig/widgets/logqso.cpp wsjtx/widgets/logqso.cpp
+--- wsjtx-orig/widgets/logqso.cpp	2019-11-26 15:22:32.000000000 +0100
++++ wsjtx/widgets/logqso.cpp	2020-02-09 17:52:26.119482673 +0100
 @@ -103,11 +103,12 @@
  
    using SpOp = Configuration::SpecialOperatingActivity;
@@ -116,3 +106,36 @@
        accept();
      }
    else
+diff -ur wsjtx-orig/widgets/mainwindow.cpp wsjtx/widgets/mainwindow.cpp
+--- wsjtx-orig/widgets/mainwindow.cpp	2019-11-26 15:22:32.000000000 +0100
++++ wsjtx/widgets/mainwindow.cpp	2020-02-09 17:54:08.070150284 +0100
+@@ -3841,7 +3841,13 @@
+       if(m_nextCall!="") {
+         useNextCall();
+       } else {
+-        auto_tx_mode (false);
++        /* If Call 1st is checked, consider this a CQ call.
++         * In order to prevent CQ from automatically being transmitted,
++         * uncheck Call 1st when answering CQs.
++         */
++        if (!ui->cbFirst->isChecked()) {
++          auto_tx_mode (false);
++        }
+         if(b) {
+           m_ntx=6;
+           ui->txrb6->setChecked(true);
+@@ -5487,14 +5493,6 @@
+ 
+ void MainWindow::on_logQSOButton_clicked()                 //Log QSO button
+ {
+-  if (SpecOp::FOX != m_config.special_op_id ())
+-    {
+-      // ensure that auto Tx is disabled even if clear DX call & grid
+-      // on 73 is not checked, unless in Fox mode where it is allowed
+-      // to be a robot.
+-      auto_tx_mode (false);
+-    }
+-
+   if (!m_hisCall.size ()) {
+     MessageBox::warning_message (this, tr ("Warning:  DX Call field is empty."));
+   }
