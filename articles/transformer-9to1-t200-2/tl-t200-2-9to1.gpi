@@ -1,0 +1,75 @@
+set terminal svg size 800,600
+set output 'tl-t200-2-9to1.svg'
+set title 'Transmission Loss T200-2 9:1 + ATU vs 49:1'
+set key vertical
+set key at 32000,0.5 top left
+set xlabel 'kHz'
+set ylabel 'Loss dB'
+set grid ytics mytics xtics mxtics
+set yrange [5:0]
+set tics font ", 7"
+set ytics 0.25
+set mytics 2
+set xtics 1000 rotate by 45 right
+set mxtics 2
+set style rect fc lt -1 fs solid 0.2 noborder
+set obj rect from 1800, graph 0 to 2000, graph 1
+set obj rect from 3500, graph 0 to 3800, graph 1
+set obj rect from 5351.5, graph 0 to 5366.5, graph 1
+set obj rect from 7000, graph 0 to 7200, graph 1
+set style rect fc rgb "red" fs solid 0.3 noborder
+set obj rect from 10100, graph 0 to 10150, graph 1
+set style rect fc lt -1 fs solid 0.2 noborder
+set obj rect from 14000, graph 0 to 14350, graph 1
+set style rect fc rgb "red" fs solid 0.3 noborder
+set obj rect from 18068, graph 0 to 18168, graph 1
+set style rect fc lt -1 fs solid 0.2 noborder
+set obj rect from 21000, graph 0 to 21450, graph 1
+set style rect fc rgb "red" fs solid 0.3 noborder
+set obj rect from 24890, graph 0 to 24990, graph 1
+set style rect fc lt -1 fs solid 0.2 noborder
+set obj rect from 28000, graph 0 to 29700, graph 1
+$nineOneMFJt200 << EOD
+1800
+3500 0
+7000 0
+10100 0
+14000 0.512
+18068 0.792
+28000 1.576
+50000
+EOD
+$nineOneLDGt200 << EOD
+1800
+3500 1.09
+7000 0.198
+10100 0.478
+14000 0.717
+18068 1.58
+28000 3.7
+50000
+EOD
+$nineOne61 << EOD
+1800 2.52
+3500 0.473
+7000 0.045
+10100 0
+14000 0.089
+18068 0.123
+28000 0.224
+50000 0.5935
+EOD
+$fortyNineOne << EOD
+1800 3.83
+3500 2.035
+7000 1.46
+10100 1.32
+14000 1.26
+18068 1.26
+28000 1.775
+50000 5.9287
+EOD
+plot '$nineOneMFJt200' using 1:2 with lines lw 2 title 'T200-2 9:1 MFJ971' smooth mcsplines, \
+'$nineOneLDGt200' using 1:2 with lines lw 2 title 'T200-2 9:1 LDG817' smooth mcsplines, \
+'$nineOne61' using 1:2 with lines lw 2 title 'FT140-61 9:1' smooth mcsplines, \
+'$fortyNineOne' using 1:2 with lines lw 2 title 'FT140-43 49:1' smooth mcsplines
