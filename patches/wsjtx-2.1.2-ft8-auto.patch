@@ -69,6 +69,7 @@
 ## If you want to answer calls (not CQ), make sure you uncheck "Call 1st",
 ## otherwise WSJTX will continue with the Auto Seq and send a CQ when you have
 ## received a 73 (CQuing on someone elses QRG is generally not recommended).
+## Best is to uncheck "Log automatically" in Settings/Reporting.
 ## Please keep in mind that it is your responsibility as an amateur radio
 ## operator to ensure the robot doesn't do the wrong thing and interfere with
 ## your fellow ham's right to enjoy the hobby or interfere with other radio

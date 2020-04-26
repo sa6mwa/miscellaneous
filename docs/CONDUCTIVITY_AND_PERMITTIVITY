@@ -1,0 +1,79 @@
+Dialectric Permittivity and Conductivity
+
+Dialectric constant = Relative permittivity = Vacuum = Er 1 (E = E0)
+
+Er = Permittivity
+S/m = Conductivity expressed in Siemens per meter
+Mhos/m = S/m (Ohm backwards, since S/m is the inverse of Ohm)
+
+Type                          Er        S/m
+-----------------------------------------------------
+Snow                          1.4-2.5   10^-7 = 0.0000001
+Oil                           2-4       10^-5 = 0.00001
+Fresh water ice               3
+Sea ice                       4-7       >10^-2 = 0.01
+Frozen soil                   4-5
+Water @20C                    80.2
+Water @0C                     87.9
+
+https://www.researchgate.net/figure/Dielectric-Permittivity-and-Conductivity_tbl1_256925608
+
+Source: Digital Communications by Mehmet Safak page 84
+Poor ground                   4-7       0.001
+Average ground                0.005     15
+Good ground                   0.02      25-30
+Sea water                     5         81
+Fresh water                   0.01      81
+
+
+Source: https://hamwaves.com/ground/en/index.html
+Soil                          Er        S/m
+---------------------------------------------
+Polar ice cap                 1         0.0001
+City industrial area          3         0.0001
+Polar ice                     3         0.0003
+City industrial max a         3         0.0004
+Arctic land                   3         0.0005
+Sea ice                       4         0.001
+Poor                          5         0.001
+City ind. avg attenu          5         0.001
+Dry, sandy, coastal           10        0.001
+Fresh water                   80        0.001
+Fresh water 10C 100Mc         84        0.001
+Mountainous hills<1km         5         0.002
+Fertile land                  10        0.002
+Rocky, steep hills            15        0.002
+Moderate                      4         0.003
+Medium hills & forest         13        0.004
+Average                       13        0.005
+Highly moist ground           30        0.005
+Fresh water 20C 100Mc         80        0.005
+Pastoral hills, rich soil     17        0.007
+Marshly land, densily wooded  12        0.0075
+Marshly, forested, flat       12        0.008
+Good                          4         0.01
+Rich agric land, low hills    15        0.01
+Sea water 20C <1GHz           73        4.0
+Sea water 10C <1GHz           80        4.0
+Sea water                     81        5.0
+
+
+
+
+
+
+
+
+
+
+https://en.wikipedia.org/wiki/Electrical_resistivity_and_conductivity
+
+Material          Siemens/m   Non-scientific
+------------------------------------------------------
+Silver            6.3e7       63000000
+Copper            5.8e7       58000000
+Aluminium         3.77e7      37700000
+Stainless Steel   1.45e6      1450000
+Titanium          2.38e6      2380000
+Carbon Steel      6.99e6      6990000
+
