@@ -22,7 +22,7 @@ cd ~/src
 wget http://files.js8call.com/$VER/js8call-$VER.tgz
 tar -xf js8call-$VER.tgz
 cd js8call-$VER
-cmake -D hamlib_LIBRARY_DIRS=~/hamlib -D CMAKE_INSTALL_PREFIX=~/src/js8call-$VER/output
+cmake -D hamlib_LIBRARY_DIRS=~/hamlib -D CMAKE_INSTALL_PREFIX=~/src/js8call-$VER/output .
 cmake --build . -- -j4
 #
 ## if you get the following error...
