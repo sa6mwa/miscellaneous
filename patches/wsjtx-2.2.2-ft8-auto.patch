@@ -1,0 +1,153 @@
+# AUTO FT8 PATCH FOR WSJTX 2.2.2
+#
+# DISCLAIMER:
+# This patch merely enables features already present in WSJT-X, but disabled by
+# choice by the author(s). It does not improve the automatic logic in WSJT-X.
+# In fact, the auto features are not very well programmed. Almost all edge
+# cases fail. My intention of the patch is to make FT8 contacts without the
+# need to click the same buttons after every single contact (a very boring
+# aspect of FT8 in WSJT-X, especially since everything else is automated and
+# there is no possibility for real operator interaction in a QSO). I also
+# intend to use this patch to operate two transceivers at the same time (FT8
+# and SSB for example). Since the automatic logic in WSJT-X is not fully
+# developed, you will make more contacts by regularly monitoring WSJT-X and
+# make adjustments. Don't expect to be able to leave WSJT-X running for hours
+# without interaction. Funny enough, a fully automatic system needs constant
+# attention, this is something we often overlook. This is true for all systems,
+# complex or otherwise. All IT systems have operations people and if you want
+# the system to run during the night, you need these people oncall 24 hours per
+# day, 365 days per year to keep your services up and running. This is also
+# true if you want to make many contacts with this patch.
+#
+# Long live the radio operator!
+#
+#
+# You need the following dependencies if you run Ubuntu Mate 18.04 Bionic or
+# 18.10 Cosmic, seem to be similar packages for Ubuntu Mate 20.10 Groovy
+# (apt-get install ...):
+#
+# build-essential
+# gfortran
+# cmake
+# texinfo
+# libfftw3-dev
+# libhamlib-dev
+# qtmultimedia5-dev
+# libqt5multimedia5-plugins
+# libqt5serialport5-dev
+# libudev-dev
+# qttools5-dev-tools
+# qttools5-dev
+# libusb-1.0-0-dev
+#
+#
+# Download source tarball from
+# https://www.physics.princeton.edu/pulsar/K1JT/wsjtx.html
+#
+# For an unknown reason (geoip block?), I am unable to access
+# www.physics.princeton.edu or physics.princeton.edu from all of my Internet
+# providers. Luckily I can access it through a VPN node in, for example, the
+# US.
+#
+## Unpack main tgz followed by wsjtx.tgz in the src/ directory:
+# tar -xzf wsjtx-2.1.2.tgz
+# cd wsjtx-2.1.2/src
+# tar -xzf wsjtx.tgz
+## Apply patch:
+# patch -p0 -i ~/github/sa6mwa/miscellaneous/patches/wsjtx-2.1.2-ft8-auto.patch
+## Repackage wstjx.tgz:
+# tar -czf wsjtx.tgz wsjtx
+# md5sum wsjtx.tgz > wsjtx.tgz.md5sum
+# rm -r wsjtx
+# cd ..
+## Build as normal:
+# mkdir build
+# cd build
+# cmake -DWSJT_SKIP_MANPAGES=ON -DWSJT_GENERATE_DOCS=OFF ../
+# cmake --build .
+# sudo cmake --build . --target install
+#
+# In order to enable fully automatic FT8 CQ, enter Settings/Reporting and check
+# "Log automatically" (AutoLog=true in .config/WSJT-X.ini). You may also want
+# to increase "Tx watchdog" (TxWatchdog) under Settings/General (I do not
+# recommend disabling it), and perhaps set TxPower= and LogComments= in
+# .config/WSJT-X.ini (restart WSJTX after editing this file). In the main
+# window, check "Auto Seq", "Call 1st" and choose "Next" TX6 in the 1st macro
+# slide (CQ YOUR_CALLSIGN YOUR_GRID). Find a clear frequency and click "Enable
+# Tx". You may get duplicates in the log that you need to filter out, usually
+# due to that your report is not heard by the DX station and he or she
+# retransmits, making WSJTX log twice.
+# If you want to answer calls (not CQ), make sure you uncheck "Call 1st",
+# otherwise WSJTX will continue with the Auto Seq and send a CQ when you have
+# received a 73 (CQuing on someone elses QRG is generally not recommended).
+# Best is to uncheck "Log automatically" in Settings/Reporting.
+# Please keep in mind that it is your responsibility as an amateur radio
+# operator to ensure the robot doesn't do the wrong thing and interfere with
+# your fellow ham's right to enjoy the hobby or interfere with other radio
+# traffic.
+#
+diff -ru wsjtx-orig/Configuration.ui wsjtx/Configuration.ui
+--- wsjtx-orig/Configuration.ui	2020-11-29 19:19:18.330311962 +0100
++++ wsjtx/Configuration.ui	2020-11-29 19:36:04.813640939 +0100
+@@ -1781,7 +1781,7 @@
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Check to have QSOs logged automatically, when complete.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+             <property name="text">
+-             <string>Log automatically (contesting only)</string>
++             <string>Log automatically</string>
+             </property>
+            </widget>
+           </item>
+diff -ru wsjtx-orig/widgets/logqso.cpp wsjtx/widgets/logqso.cpp
+--- wsjtx-orig/widgets/logqso.cpp	2020-11-29 19:19:18.906810792 +0100
++++ wsjtx/widgets/logqso.cpp	2020-11-29 19:36:04.813640939 +0100
+@@ -103,11 +103,12 @@
+ 
+   using SpOp = Configuration::SpecialOperatingActivity;
+   auto special_op = m_config->special_op_id ();
+-  if (SpOp::FOX == special_op
+-      || (m_config->autoLog ()
+-          && SpOp::NONE < special_op && special_op < SpOp::FOX))
++  //if (SpOp::FOX == special_op
++  //    || (m_config->autoLog ()
++  //        && SpOp::NONE < special_op && special_op < SpOp::FOX))
++  if (SpOp::FOX == special_op || m_config->autoLog())
+     {
+-      // allow auto logging in Fox mode and contests
++      // always allow auto logging / SA6MWA
+       accept();
+     }
+   else
+diff -ru wsjtx-orig/widgets/mainwindow.cpp wsjtx/widgets/mainwindow.cpp
+--- wsjtx-orig/widgets/mainwindow.cpp	2020-11-29 19:19:18.906810792 +0100
++++ wsjtx/widgets/mainwindow.cpp	2020-11-29 19:36:04.817640690 +0100
+@@ -3958,7 +3958,13 @@
+       if(m_nextCall!="") {
+         useNextCall();
+       } else {
+-        auto_tx_mode (false);
++        /* If Call 1st is checked, consider this a CQ call.
++         * In order to prevent CQ from automatically being transmitted,
++         * uncheck Call 1st when answering CQs.
++         */
++        if (!ui->cbFirst->isChecked()) {
++          auto_tx_mode (false);
++        }
+         if(b) {
+           m_ntx=6;
+           ui->txrb6->setChecked(true);
+@@ -5639,14 +5645,6 @@
+ 
+ void MainWindow::on_logQSOButton_clicked()                 //Log QSO button
+ {
+-  if (SpecOp::FOX != m_config.special_op_id ())
+-    {
+-      // ensure that auto Tx is disabled even if clear DX call & grid
+-      // on 73 is not checked, unless in Fox mode where it is allowed
+-      // to be a robot.
+-      auto_tx_mode (false);
+-    }
+-
+   if (!m_hisCall.size ()) {
+     MessageBox::warning_message (this, tr ("Warning:  DX Call field is empty."));
+   }
