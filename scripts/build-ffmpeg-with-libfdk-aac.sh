@@ -2,6 +2,7 @@
 if [ "$1" != "okilidokili" ]; then
   echo "This script is tailored for Ubuntu Mate 20.10 groovy and"
   echo "may not build on other debian-based systems."
+  echo "Also confirmed working for: Ubuntu 20.04.2 LTS focal"
   echo "Good to go? Build like this..."
   echo
   echo "$0 okilidokili"
