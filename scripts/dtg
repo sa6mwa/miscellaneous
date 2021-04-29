@@ -1,5 +1,5 @@
 #!/bin/sh
-LC_TIME=en_US
+LC_TIME=en_US.UTF-8
 # default time zone letter
 zl=Z
 case "$(date +%z)" in
