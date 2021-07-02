@@ -167,16 +167,13 @@ Unlike with simple modulo 26, a zero-key encryption (key consists of only A)
 does not work, instead each letter has to be coded aaccording to both forward
 and reverse position of the text and we end up with...
 
-```
    Message: HELLO WORLD
        Key: LRDDX HXRDT
 CipherText: HELLO WORLD
 
-```
 
 Another arrangement of the trigraph...
 
-```
   A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
  ----------------------------------------------------
 A A A A A A A A A A A A A A A A A A A A A A A A A A A
