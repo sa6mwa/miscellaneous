@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2
 # slimjim and j pole calculator by sa6mwa@radiohorisont.se
 # inspired by m0ukd's js calculator:
 # https://m0ukd.com/calculators/slim-jim-and-j-pole-calculator/

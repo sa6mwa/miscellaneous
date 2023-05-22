@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2
 # resonant feedline dipole (RFD) calculator
 import sys
 # default velocity factor (vf)

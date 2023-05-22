@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2
 # 4:1 off center fed dipole calculator
 import sys
 # default end effect compensation ratio (aka velocity factor)
