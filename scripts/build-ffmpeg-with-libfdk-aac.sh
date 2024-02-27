@@ -1,19 +1,22 @@
 #!/bin/bash
-if [ "$1" != "okilidokili" ]; then
+
+DIR="$HOME/ffmpeg-build"
+
+if [ "$1" != "go" ]; then
   echo "This script is tailored for Ubuntu Mate 20.10 groovy and"
   echo "may not build on other debian-based systems."
   echo "Also confirmed working for: Ubuntu 20.04.2 LTS focal"
   echo "Good to go? Build like this..."
   echo
-  echo "$0 okilidokili"
+  echo "$0 go"
   exit
 fi
 
 set -xe
 
-if [ ! -d ffmpeg_source ]; then
-  mkdir ffmpeg_source
-  cd ffmpeg_source
+if [ ! -d $DIR ]; then
+  mkdir -p $DIR
+  cd $DIR
 fi
 
 sudo apt-get update -qq

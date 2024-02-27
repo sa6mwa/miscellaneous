@@ -11,7 +11,7 @@
 # With the activation_bytes, you can play and recode the aax into another
 # format via fmpeg.
 #
-# ffmpeg -activation_bytes=123456 -i my.aax output.wav
+# ffmpeg -activation_bytes 123abc -i input.aax -vn -c:a copy output.m4b
 
 set -euo pipefail
 
@@ -23,4 +23,4 @@ fi
 
 chksum=$(ffprobe $1 2>&1 | grep -o 'checksum == .*' | cut -d' ' -f3)
 
-./rcrack . -h ${chksum}
+./rcrack . -h ${chksum} | grep -o 'hex:.*' | cut -d: -f2
